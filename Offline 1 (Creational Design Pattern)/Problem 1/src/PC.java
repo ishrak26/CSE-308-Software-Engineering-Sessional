@@ -65,21 +65,21 @@ public abstract class PC {
     public void print() {
         System.out.println("The details of this PC are listed below:");
         System.out.println("Name: " + getName());
-        System.out.println("Processor: " + getProcessor().getName() + "\t" + getProcessor().getPrice());
-        System.out.println("HDD: 1 TB");
+        System.out.println("Processor: " + getProcessor().getName() + "\t\t" + getProcessor().getPrice() + " BDT");
+        System.out.println("HDD: 1 TB, Motherboard" + "\t\t" + BASE_PRICE + " BDT");
         System.out.println("RAM(s):");
         for (RAM r:
              rams) {
-            System.out.println(r.getName() + " " + r.getPrice());
+            System.out.println(r.getName() + "\t\t" + r.getPrice() + " BDT");
         }
         System.out.println("Graphics Card(s):");
         for (GraphicsCard gc:
              graphicsCards) {
-            System.out.println(gc.getName() + " " + gc.getPrice());
+            System.out.println(gc.getName() + "\t\t" + gc.getPrice() + " BDT");
         }
-        if (getCooler() != null) System.out.println("Cooler: " + getCooler().getName() + "\t" +
-                getCooler().getPrice());
+        if (getCooler() != null) System.out.println("Cooler: " + getCooler().getName() + "\t\t" +
+                getCooler().getPrice() + " BDT");
         if (getDVDDrive() != null) System.out.println("DVD Drive: " + getDVDDrive().getName()
-                + "\t" + getDVDDrive().getPrice());
+                + "\t\t" + getDVDDrive().getPrice() + " BDT");
     }
 }
