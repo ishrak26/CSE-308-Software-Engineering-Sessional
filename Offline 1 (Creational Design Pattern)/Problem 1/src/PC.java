@@ -81,5 +81,6 @@ public abstract class PC {
                 getCooler().getPrice() + " BDT");
         if (getDVDDrive() != null) System.out.println("DVD Drive: " + getDVDDrive().getName()
                 + "\t\t" + getDVDDrive().getPrice() + " BDT");
+        System.out.println("Total Price: " + getPrice());
     }
 }

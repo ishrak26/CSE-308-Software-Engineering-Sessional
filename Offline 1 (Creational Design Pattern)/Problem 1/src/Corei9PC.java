@@ -13,6 +13,7 @@ public class Corei9PC extends PC {
     @Override
     public void addDVDDrive() {
         dvdDrive = new DVDDrive();
+        price += dvdDrive.getPrice();
     }
 
     @Override

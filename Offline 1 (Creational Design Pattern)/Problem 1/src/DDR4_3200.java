@@ -8,4 +8,9 @@ public class DDR4_3200 extends DDR4_RAM {
     public int getSpeed() {
         return 3200;
     }
+
+    @Override
+    public String getName() {
+        return super.getName() + " 3200 MHz";
+    }
 }

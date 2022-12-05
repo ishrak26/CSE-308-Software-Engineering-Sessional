@@ -8,6 +8,7 @@ public class Corei7PC extends PC {
     @Override
     public void addCooler() {
         cooler = new LiquidCooler();
+        price += cooler.getPrice();
     }
 
     @Override

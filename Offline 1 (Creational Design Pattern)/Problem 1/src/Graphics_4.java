@@ -9,4 +9,9 @@ public class Graphics_4 extends GraphicsCard {
     public int getStorage() {
         return 4;
     }
+
+    @Override
+    public String getName() {
+        return super.getName() + " 4 GB";
+    }
 }

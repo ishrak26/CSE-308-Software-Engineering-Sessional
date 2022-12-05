@@ -9,6 +9,7 @@ public class Corei5PC extends PC {
     @Override
     public void addCooler() {
         cooler = new CPUCooler();
+        price += cooler.getPrice();
     }
 
     @Override
