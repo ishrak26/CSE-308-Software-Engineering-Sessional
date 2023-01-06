@@ -34,6 +34,12 @@ public class VendingMachine {
         }
     }
 
+    public void display() {
+        System.out.println("No. of products: " + getProductCount());
+        System.out.println("Product price: " + getProductPrice());
+        System.out.println("Current balance: " + getCurrentBalance());
+    }
+
     public State getWaitingForRequestState() {
         return waitingForRequestState;
     }

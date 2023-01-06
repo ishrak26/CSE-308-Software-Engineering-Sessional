@@ -7,21 +7,23 @@ public class HasMoreMoney implements State {
 
     @Override
     public void collectMoney(int money) {
-
+        System.out.println("Sorry, current balance already exceeds the product price. Please wait to get your return...");
     }
 
     @Override
     public void returnMoney() {
-
+        System.out.println("Here is your return money...");
+        System.out.println("Your product is now being delivered...");
+        vendingMachine.setState(vendingMachine.getSellProductState());
     }
 
     @Override
     public void deliverProduct() {
-
+        System.out.println("Please wait...You will get your return money first, and then the product.");
     }
 
     @Override
-    public void refillProduct() {
-
+    public void refillProduct(int productCount) {
+        System.out.println("Machine is non-empty...No refill currently required!");
     }
 }
