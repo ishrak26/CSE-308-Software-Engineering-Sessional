@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class VendingMachine {
     State waitingForRequestState;
     State hasLessMoneyState;
@@ -10,13 +12,15 @@ public class VendingMachine {
     int productPrice;
     int currentBalance = 0;
 
+    Scanner scn;
+
     public VendingMachine(int productCount, int productPrice) {
         this.productCount = productCount;
         this.productPrice = productPrice;
 
         waitingForRequestState = new WaitingForRequest(this);
         hasLessMoneyState = new HasLessMoney(this);
-        hasMoreMoneyState = new HasLessMoney(this);
+        hasMoreMoneyState = new HasMoreMoney(this);
         sellProductState = new SellProduct(this);
         soldOutState = new SoldOut(this);
 
@@ -26,9 +30,11 @@ public class VendingMachine {
         else {
             state = soldOutState;
         }
+
+        scn = new Scanner(System.in);
     }
 
-    public void deliverProduct() {
+    public void deliver() {
         if (productCount > 0) {
             productCount--;
         }
@@ -38,6 +44,24 @@ public class VendingMachine {
         System.out.println("No. of products: " + getProductCount());
         System.out.println("Product price: " + getProductPrice());
         System.out.println("Current balance: " + getCurrentBalance());
+    }
+
+    public void collectMoney() {
+        System.out.println("Enter your payment (in BDT):");
+        int money = scn.nextInt();
+        state.collectMoney(money);
+    }
+
+    public void returnMoney() {
+        state.returnMoney();
+    }
+
+    public void deliverProduct() {
+        state.deliverProduct();
+    }
+
+    public void refillProduct(int productCount) {
+        state.refillProduct(productCount);
     }
 
     public State getWaitingForRequestState() {
@@ -90,5 +114,9 @@ public class VendingMachine {
 
     public void setCurrentBalance(int currentBalance) {
         this.currentBalance = currentBalance;
+    }
+
+    public boolean isEmpty() {
+        return getProductCount() == 0;
     }
 }

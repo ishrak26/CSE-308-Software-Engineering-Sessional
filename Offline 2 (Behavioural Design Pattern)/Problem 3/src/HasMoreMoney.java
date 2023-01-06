@@ -13,8 +13,10 @@ public class HasMoreMoney implements State {
     @Override
     public void returnMoney() {
         System.out.println("Here is your return money...");
+        vendingMachine.setCurrentBalance(vendingMachine.getProductPrice());
         System.out.println("Your product is now being delivered...");
         vendingMachine.setState(vendingMachine.getSellProductState());
+        vendingMachine.deliverProduct();
     }
 
     @Override

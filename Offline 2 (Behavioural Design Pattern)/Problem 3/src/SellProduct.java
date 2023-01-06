@@ -19,15 +19,15 @@ public class SellProduct implements State {
     public void deliverProduct() {
         System.out.println("Thank you for purchasing from our vending machine!");
         System.out.println("Here is your product...");
-        vendingMachine.deliverProduct();
+        vendingMachine.deliver();
         System.out.println("Your product has been delivered.");
+        vendingMachine.setCurrentBalance(0);
         if (vendingMachine.getProductCount() == 0) {
             vendingMachine.setState(vendingMachine.getSoldOutState());
             System.out.println("Oops! We are out of stock.");
         }
         else {
             vendingMachine.setState(vendingMachine.getWaitingForRequestState());
-            System.out.println("Waiting for a new order...");
         }
     }
 

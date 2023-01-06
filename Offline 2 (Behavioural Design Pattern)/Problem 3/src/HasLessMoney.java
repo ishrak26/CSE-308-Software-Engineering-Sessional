@@ -14,16 +14,19 @@ public class HasLessMoney implements State {
         if (vendingMachine.getCurrentBalance() == vendingMachine.getProductPrice()) {
             System.out.println("Your product is being delivered...");
             vendingMachine.setState(vendingMachine.getSellProductState());
+            vendingMachine.deliverProduct();
         }
         else if (vendingMachine.getCurrentBalance() < vendingMachine.getProductPrice()) {
             System.out.println("Please pay BDT " + (vendingMachine.getProductPrice() - vendingMachine.getCurrentBalance()) +
                     " more to get your product.");
             vendingMachine.setState(vendingMachine.getHasLessMoneyState());
+            vendingMachine.collectMoney();
         }
         else {
             System.out.println("Please wait...BDT " + (vendingMachine.getCurrentBalance() - vendingMachine.getProductPrice())
                     + " is being returned...");
             vendingMachine.setState(vendingMachine.getHasMoreMoneyState());
+            vendingMachine.returnMoney();
         }
     }
 
