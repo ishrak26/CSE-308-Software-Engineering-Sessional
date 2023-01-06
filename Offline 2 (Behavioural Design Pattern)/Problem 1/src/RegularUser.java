@@ -25,6 +25,7 @@ public class RegularUser implements Observer {
         System.out.println("Regular User:");
         if (getPreviousState() == States.OPERATIONAL) {
             if (getCurrentState() == States.PARTIALLY_DOWN) {
+                System.out.println("Our server is partially down now");
                 System.out.println("Please choose one of the following options:");
                 System.out.println("1. Continue using the limited functionality");
                 System.out.println("2. Pay $20 per hour to enjoy the full functionality taking service " +
@@ -71,9 +72,10 @@ public class RegularUser implements Observer {
         }
         else if (getPreviousState() == States.PARTIALLY_DOWN) {
             if (getCurrentState() == States.OPERATIONAL) {
-                System.out.println("Our server is fully operational now");
+                System.out.println("Our server is operational now");
                 if (isFullFunction()) {
                     System.out.println("Your bill for using the fully functional service is x");
+                    setFullFunction(false);
                 }
             }
             else {
@@ -82,9 +84,10 @@ public class RegularUser implements Observer {
         }
         else {
             if (getCurrentState() == States.OPERATIONAL) {
-                System.out.println("Our server is fully operational now");
+                System.out.println("Our server is operational now");
                 if (isFullFunction()) {
                     System.out.println("Your bill for using the fully functional service is x");
+                    setFullFunction(false);
                 }
             }
             else {
