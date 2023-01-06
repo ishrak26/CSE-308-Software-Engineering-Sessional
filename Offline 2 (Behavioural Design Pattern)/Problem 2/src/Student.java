@@ -10,19 +10,25 @@ public class Student {
     }
 
     public void recheck() {
-        mediator.recheck(this);
+        System.out.println("Re-examine request sent from student id " + getId());
+        getMediator().recheck(this);
     }
 
     public void notifyMarks(int marks) {
         System.out.print("Results are out from the Exam Controller Office...");
-        System.out.println("Student with id = " + getId() + " has obtained " + marks);
+        System.out.println("Student id " + getId() + " has obtained " + marks);
         setMarks(marks);
     }
 
-    public void notifyRecheckMarks(int marks) {
-        System.out.print("Recheck results are out from the Exam Controller Office...");
-        System.out.println("Student with id = " + getId() + " has obtained " + marks);
-        setMarks(marks);
+    public void notifyRecheckMarks(int marks, boolean isChange) {
+        System.out.print("Re-examine results are out from the Exam Controller Office...");
+        if (isChange) {
+            System.out.println("Student id " + getId() + " has now obtained " + marks);
+            setMarks(marks);
+        }
+        else {
+            System.out.println("There has been no change in marks after re-examine.");
+        }
     }
 
     public Mediator getMediator() {

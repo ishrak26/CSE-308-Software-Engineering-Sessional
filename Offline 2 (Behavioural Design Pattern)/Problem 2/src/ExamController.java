@@ -1,17 +1,19 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.lang.Math.max;
 
 public class ExamController implements Mediator {
     private HashMap<Integer, Student> students;
     private List<Examiner> examiners;
     private HashMap<Student, Examiner> studentToExaminer;
 
+    private Random random;
+
     public ExamController() {
         students = new HashMap<>();
         examiners = new ArrayList<>();
         studentToExaminer = new HashMap<>();
+        random = new Random();
     }
 
     public void registerStudent(Student student) {
@@ -22,13 +24,35 @@ public class ExamController implements Mediator {
         examiners.add(examiner);
     }
 
+    // for this particular offline only
+    // assign the same examiner to all students
+    public void assginExaminerToStudent() {
+        for (Student student : students.values()) {
+            studentToExaminer.put(student, examiners.get(0));
+        }
+    }
+
     public int scrutinize(int id, int previousMarks) {
         // add probability later
+        if (random.nextInt() % 2 == 0) {
+            int change = random.nextInt() % 3;
+            if (change == 0) {
+                change++;
+            }
+            int newMarks = max(0, previousMarks + change);
+            System.out.println("Marks of student id " + id + " has been corrected to " +
+                    newMarks + " from " + previousMarks + " during scrutinization");
+            return newMarks;
+        }
         return previousMarks;
     }
 
     @Override
     public void receiveMarksheet(Examiner examiner, HashMap<Integer, Integer> marksheet) {
+        System.out.println("Marksheet received from examiner.");
+        for (Map.Entry<Integer, Integer> e : marksheet.entrySet()) {
+            System.out.println("Student id " + e.getKey() + " has obtained " + e.getValue() + " marks.");
+        }
         for (Map.Entry<Integer, Integer> e : marksheet.entrySet()) {
             marksheet.put(e.getKey(), scrutinize(e.getKey(), e.getValue()));
 //            students.get(e.getKey()).notifyMarks(e.getValue());
@@ -43,6 +67,7 @@ public class ExamController implements Mediator {
 
     @Override
     public void recheck(Student student) {
+        System.out.println("Re-examine request got from student id " + student.getId());
         // find corresponding examiner
         studentToExaminer.get(student).recheck(student.getId());
     }
@@ -50,7 +75,9 @@ public class ExamController implements Mediator {
     @Override
     public void receiveRecheckResult(Examiner examiner, boolean isChange, int studentID, int marks) {
         if (isChange) {
-            students.get(studentID).notifyRecheckMarks(marks);
+            System.out.println("There has been a correction for student id " + studentID);
         }
+        System.out.println("Re-examine results sent from Exam Controller Office to student id " + studentID);
+        students.get(studentID).notifyRecheckMarks(marks, isChange);
     }
 }

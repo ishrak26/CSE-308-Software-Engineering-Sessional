@@ -1,23 +1,33 @@
 import java.util.HashMap;
+import java.util.Random;
 
 public class Examiner {
     private HashMap<Integer, Integer> marksheet;
     private Mediator mediator;
+    private Random random;
 
     public Examiner(Mediator mediator) {
         setMediator(mediator);
         marksheet = new HashMap<>();
+        random = new Random();
     }
 
     public void recheck(int studentID) {
-        int previousMarks = marksheet.get(studentID);
+        System.out.println("Re-examine request received from Exam Controller Office for student id " + studentID);
+        int previousMarks = getMarksheet().get(studentID);
         // add probability here
-        int newMarks = previousMarks;
+        int newMarks = previousMarks + random.nextInt() % 2;
         boolean isChange = (previousMarks != newMarks);
         if (isChange) {
-            marksheet.put(studentID, newMarks);
+            getMarksheet().put(studentID, newMarks);
+            System.out.println("There was mistake in the previous marks...");
+            System.out.println("Marks corrected from " + previousMarks + " to " + newMarks);
         }
-        mediator.receiveRecheckResult(this, isChange, studentID, newMarks);
+        else {
+            System.out.println("There is no change in marks after re-examine...");
+        }
+        System.out.println("Re-examine results sent to Exam Controller Office for student id " + studentID);
+        getMediator().receiveRecheckResult(this, isChange, studentID, newMarks);
     }
 
     public HashMap<Integer, Integer> getMarksheet() {
@@ -34,5 +44,28 @@ public class Examiner {
 
     public void setMediator(Mediator mediator) {
         this.mediator = mediator;
+    }
+
+    public void generateMarksheet(int studentCount) {
+        for (int i = 1; i <= studentCount; i++) {
+            getMarksheet().put(i, random.nextInt() % 100);
+            if (getMarksheet().get(i) < 0) {
+                getMarksheet().put(i, -getMarksheet().get(i));
+            }
+        }
+    }
+
+    public void sendMarksheet() {
+        System.out.print("Scripts and marks of student id's ");
+        int count = 0;
+        for (Integer key : getMarksheet().keySet()) {
+            System.out.print(key);
+            count++;
+            if (count < getMarksheet().size()) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(" sent to Exam Controller Office.");
+        getMediator().receiveMarksheet(this, getMarksheet());
     }
 }
