@@ -19,7 +19,7 @@ public class HasLessMoney implements State {
         else if (vendingMachine.getCurrentBalance() < vendingMachine.getProductPrice()) {
             System.out.println("Please pay BDT " + (vendingMachine.getProductPrice() - vendingMachine.getCurrentBalance()) +
                     " more to get your product.");
-            vendingMachine.setState(vendingMachine.getHasLessMoneyState());
+//            vendingMachine.setState(vendingMachine.getHasLessMoneyState());
             vendingMachine.collectMoney();
         }
         else {
@@ -30,6 +30,7 @@ public class HasLessMoney implements State {
         }
     }
 
+    // in case the user is allowed to cancel order
     @Override
     public void returnMoney() {
         System.out.println("Your money is being returned...");

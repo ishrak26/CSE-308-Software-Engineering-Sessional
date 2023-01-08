@@ -7,12 +7,12 @@ public class SellProduct implements State {
 
     @Override
     public void collectMoney(int money) {
-        System.out.println("Please wait for your product to being delivered...");
+        System.out.println("Please wait for your product to be delivered...");
     }
 
     @Override
     public void returnMoney() {
-        System.out.println("Please wait for your product to being delivered...");
+        System.out.println("Please wait for your product to be delivered...");
     }
 
     @Override

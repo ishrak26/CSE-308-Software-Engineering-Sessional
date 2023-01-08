@@ -27,7 +27,7 @@ public class PremiumUser implements Observer {
             if (getCurrentState() == States.PARTIALLY_DOWN) {
                 System.out.println("Our server is now partially down...");
                 System.out.println("Please choose one of the following options:");
-                System.out.println("1. Use service from two servers (partially from ABC and partially from DEF");
+                System.out.println("1. Use service from two servers (partially from ABC and partially from DEF)");
                 System.out.println("2. Use service only from DEF");
                 int inp = scn.nextInt();
                 if (inp == 1) {

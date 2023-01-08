@@ -13,7 +13,7 @@ public class Examiner {
     }
 
     public void recheck(int studentID) {
-        System.out.println("Re-examine request received from Exam Controller Office for student id " + studentID);
+        System.out.println("Re-examine request received to Examiner from Exam Controller Office for student id " + studentID);
         int previousMarks = getMarksheet().get(studentID);
         // add probability here
         int newMarks = previousMarks + random.nextInt() % 2;
@@ -26,7 +26,7 @@ public class Examiner {
         else {
             System.out.println("There is no change in marks after re-examine...");
         }
-        System.out.println("Re-examine results sent to Exam Controller Office for student id " + studentID);
+        System.out.println("Re-examine results sent to Exam Controller Office from Examiner for student id " + studentID);
         getMediator().receiveRecheckResult(this, isChange, studentID, newMarks);
     }
 
@@ -65,7 +65,7 @@ public class Examiner {
                 System.out.print(", ");
             }
         }
-        System.out.println(" sent to Exam Controller Office.");
+        System.out.println(" sent to Exam Controller Office from Examiner");
         getMediator().receiveMarksheet(this, getMarksheet());
     }
 }

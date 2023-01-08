@@ -7,7 +7,7 @@ public class Main {
         System.out.println("Please set the product price");
         Scanner scn  = new Scanner(System.in);
         int productPrice = scn.nextInt();
-        System.out.println("Please set the initial product count");
+        System.out.println("Please set the initial product count (>0)");
         int productCount = scn.nextInt();
         VendingMachine vendingMachine = new VendingMachine(productCount, productPrice);
         while (true) {
