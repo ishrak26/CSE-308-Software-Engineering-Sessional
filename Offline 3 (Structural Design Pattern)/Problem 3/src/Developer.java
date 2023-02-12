@@ -1,11 +1,13 @@
 public class Developer extends Personnel implements Component  {
     private String name;
     private Personnel manager;
+    private Composite parent;
 
-    public Developer(String name, Personnel manager) {
+    public Developer(String name, Personnel manager, Composite parent) {
         this.name = name;
         this.manager = manager;
         role = "Developer";
+        this.parent = parent;
     }
 
     @Override
@@ -33,5 +35,6 @@ public class Developer extends Personnel implements Component  {
     @Override
     public void remove() {
         System.out.println("Developer " + getName() + " has been removed successfully.");
+        parent.removeComponent(this);
     }
 }

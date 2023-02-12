@@ -61,7 +61,7 @@ public class Main {
                                         if (companies.containsKey(companyName)) {
                                             System.out.println("Enter the project name for this Project Manager: ");
                                             String projectName = scn.nextLine();
-                                            managers.put(name, new Manager(name, projectName));
+                                            managers.put(name, new Manager(name, projectName, companies.get(companyName)));
                                             companies.get(companyName).addComponent(managers.get(name));
                                             System.out.println("Project Manager " + name + " created successfully.");
                                             break;
@@ -90,7 +90,8 @@ public class Main {
                                         System.out.println("Enter Project Manager name: ");
                                         String managerName = scn.nextLine();
                                         if (managers.containsKey(managerName)) {
-                                            developers.put(name, new Developer(name, (Personnel) managers.get(managerName)));
+                                            developers.put(name, new Developer(name, (Personnel) managers.get(managerName),
+                                                    managers.get(managerName)));
                                             managers.get(managerName).addComponent(developers.get(name));
                                             System.out.println("Developer " + name + " created successfully.");
                                             break;

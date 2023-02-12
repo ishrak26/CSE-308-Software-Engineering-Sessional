@@ -4,13 +4,14 @@ import java.util.Set;
 public class Manager extends Personnel implements Composite {
     private String name;
     private Set<Component> developers;
-    private String currentProject;
+    private Composite parent;
 
-    public Manager(String name, String currentProject) {
+    public Manager(String name, String currentProject, Composite parent) {
         this.name = name;
         developers = new HashSet<>();
         role = "Project Manager";
         this.currentProject = currentProject;
+        this.parent = parent;
     }
 
     @Override
@@ -77,5 +78,6 @@ public class Manager extends Personnel implements Composite {
             developer.remove();
         }
         System.out.println("Project Manager " + getName() + " has been removed successfully.");
+        parent.removeComponent(this);
     }
 }
