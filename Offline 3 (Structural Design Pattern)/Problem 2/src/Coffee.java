@@ -3,16 +3,16 @@ public class Coffee extends Beverage {
 
     public Coffee(String msg) {
         if (msg.equalsIgnoreCase("Americano")) {
-            getAmericano();
+            beverage = getAmericano();
         }
         else if (msg.equalsIgnoreCase("Espresso")) {
-            getEspresso();
+            beverage = getEspresso();
         }
         else if (msg.equalsIgnoreCase("Cappuccino")) {
-            getCappuccino();
+            beverage = getCappuccino();
         }
         else if (msg.equalsIgnoreCase("Mocha")) {
-            getMocha();
+            beverage = getMocha();
         }
     }
 
@@ -30,31 +30,19 @@ public class Coffee extends Beverage {
         return beverage.getDescription();
     }
 
-    private void getAmericano() {
-        beverage = new Americano();
-        beverage = new Water(beverage);
-        beverage = new CoffeeBean(beverage);
-        beverage = new CoffeeBean(beverage);
+    private Beverage getAmericano() {
+        return new CoffeeBean(new BlackCoffee(new Americano()));
     }
 
-    private void getEspresso() {
-        beverage = new Espresso();
-        beverage = new Water(beverage);
-        beverage = new CoffeeBean(beverage);
-        beverage = new DairyCream(beverage);
+    private Beverage getEspresso() {
+        return new DairyCream(new BlackCoffee(new Espresso()));
     }
 
-    private void getCappuccino() {
-        beverage = new Cappuccino();
-        beverage = new Milk(beverage);
-        beverage = new CoffeeBean(beverage);
-        beverage = new CinnamonPowder(beverage);
+    private Beverage getCappuccino() {
+        return new CinnamonPowder(new MilkCoffee(new Cappuccino()));
     }
 
-    private void getMocha() {
-        beverage = new Mocha();
-        beverage = new Milk(beverage);
-        beverage = new CoffeeBean(beverage);
-        beverage = new ChocolateSauce(beverage);
+    private Beverage getMocha() {
+        return new ChocolateSauce(new MilkCoffee(new Mocha()));
     }
 }

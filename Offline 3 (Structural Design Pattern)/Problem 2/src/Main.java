@@ -53,7 +53,8 @@ public class Main {
                     }
 
                 }
-                System.out.println("Thank you for your order. Your order is summarized below:");
+                System.out.print("Thank you for your order. Your order is summarized below: ");
+                System.out.println("(Name of the coffee followed by the ingredients used in preparing the coffee)");
                 int totalPrice = 0;
                 for (Map.Entry<Coffee, Integer> e : orderList.entrySet()) {
                     System.out.println(e.getValue() + " cup(s) of " + e.getKey().getDescription() + "\tBDT " +
